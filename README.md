@@ -1,12 +1,12 @@
 # Switchboard
 
-**Two WhatsApp accounts. One clear workspace.**
+**Two WhatsApp accounts. One workspace.**
 
-Switchboard is a Windows desktop app that keeps two separately linked WhatsApp Web accounts in one labelled window. Built with Rust, Tauri 2, and Microsoft Edge WebView2.
+Switchboard is a Windows desktop app that keeps **two WhatsApp Web accounts** in one labelled window. Each account has its own saved session, so Personal and Work stay easy to identify and switch between. Built with Rust, Tauri 2, and Microsoft Edge WebView2.
 
-![Switchboard concept artwork](docs/assets/hero.png)
+![Supplied preview of two WhatsApp accounts side by side in Switchboard](docs/assets/whatsapp-split-view.png)
 
-*Illustrative artwork. The interface previews below use fictional demo data; they do not show live accounts.*
+*Supplied illustrative preview with sample content. It is not a live account capture; the desktop app loads WhatsApp Web into two separate native panes.*
 
 ## Features
 
@@ -17,20 +17,9 @@ Switchboard is a Windows desktop app that keeps two separately linked WhatsApp W
 - **Tray indicators:** purple for Personal, amber for Work, with count information in the tooltip and menu.
 - **Remembered workspace:** account/split mode, compact sidebar, window size, and shortcut choices survive restart.
 
-![Switchboard split-view interface demo](docs/assets/split-view.jpg)
+![Two WhatsApp accounts. One workspace.](docs/assets/hero-whatsapp.png)
 
-*Interface demo with fictional content. WhatsApp Web is loaded into native account panes when the desktop app runs.*
-
-## Preview the interface
-
-Run the browser demo without linking any accounts:
-
-```powershell
-npm ci
-npm run demo
-```
-
-Open the [split view](http://localhost:4173/?view=split), [compact view](http://localhost:4173/?view=compact), or [shortcut settings](http://localhost:4173/?view=shortcuts). The demo uses the actual app shell with a mock desktop bridge and fictional messaging panes. It does not connect to WhatsApp, register system shortcuts, or change browser permissions.
+*Supplemental brand illustration highlighting two WhatsApp accounts in one desktop workspace.*
 
 ## Build and run
 
@@ -52,6 +41,10 @@ npm run build
 ```
 
 Build output is under `src-tauri/target/release/`; the installer is under `bundle/nsis/` within that directory.
+
+### Development preview
+
+For shell development, run `npm run demo` after `npm ci`, then open the [split view](http://localhost:4173/?view=split), [compact view](http://localhost:4173/?view=compact), or [shortcut settings](http://localhost:4173/?view=shortcuts). This utility uses a mock desktop bridge and fictional messaging panes. It does not connect to WhatsApp, register system shortcuts, or change browser permissions.
 
 ## Link your accounts
 
@@ -78,12 +71,6 @@ Each account has independent browser storage. Link the accounts in Switchboard e
 Global shortcuts require Switchboard to be running. The keyboard panel offers `Ctrl+Alt+Space` for summon and `Ctrl+Alt+N` for next unread. If a shortcut is unavailable or interferes with your keyboard layout, choose an alternative or **Disabled**. An occupied replacement leaves the previous working shortcut active.
 
 Unread counts come from WhatsApp's title indicator. Next unread tries the other account first, using the last single account when starting from split view. If no positive count is known, it brings the current workspace forward. `—` in the tray tooltip means the count is unavailable.
-
-| Compact sidebar | Shortcut settings |
-| --- | --- |
-| ![Compact interface demo](docs/assets/compact-view.jpg) | ![Shortcut settings demo](docs/assets/shortcuts.jpg) |
-
-*Both previews show the app shell with fictional demo data.*
 
 ## Privacy and architecture
 
