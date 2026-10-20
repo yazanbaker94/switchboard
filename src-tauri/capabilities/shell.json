@@ -1,0 +1,19 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "shell",
+  "description": "Only the bundled app shell can control the local workspace.",
+  "webviews": ["shell"],
+  "permissions": [
+    "core:event:allow-listen",
+    "core:event:allow-unlisten",
+    "allow-set-layout",
+    "allow-reload-account",
+    "allow-set-overlay",
+    "allow-get-diagnostics",
+    "allow-set-labels",
+    "allow-enable-notifications",
+    "allow-notification-permissions",
+    "allow-set-compact-sidebar",
+    "allow-configure-shortcuts"
+  ]
+}

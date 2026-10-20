@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <title>Switchboard</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body data-mode="personal" data-compact="false">
+    <aside class="sidebar" id="account-sidebar" aria-label="Switchboard accounts">
+      <div class="brand" aria-label="Switchboard">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i></span>
+        <div><strong>Switchboard</strong><span>YOUR CHATS, ONE PLACE</span></div>
+      </div>
+
+      <div class="sidebar-heading"><span>YOUR ACCOUNTS</span><span class="account-count">02</span></div>
+      <nav class="account-list" aria-label="Select an account">
+        <button class="account-card personal is-active" id="account-personal" data-account="personal" aria-pressed="true" title="Switch to Personal (Ctrl+1)">
+          <span class="account-topline"><span class="account-avatar" aria-hidden="true">P</span><span class="account-meta"><span class="unread-badge" data-unread="personal" hidden></span><kbd>Ctrl 1</kbd></span></span>
+          <span class="account-name" data-name="personal">Personal</span>
+          <span class="account-detail"><span class="session-dot" aria-hidden="true"></span><span data-detail="personal">WhatsApp Web</span></span>
+          <span class="selected-mark" aria-hidden="true">✓</span>
+        </button>
+        <button class="account-card work" id="account-work" data-account="work" aria-pressed="false" title="Switch to Work (Ctrl+2)">
+          <span class="account-topline"><span class="account-avatar" aria-hidden="true">W</span><span class="account-meta"><span class="unread-badge" data-unread="work" hidden></span><kbd>Ctrl 2</kbd></span></span>
+          <span class="account-name" data-name="work">Work</span>
+          <span class="account-detail"><span class="session-dot" aria-hidden="true"></span><span data-detail="work">WhatsApp Web</span></span>
+          <span class="selected-mark" aria-hidden="true">✓</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-space"></div>
+
+      <button class="shortcut-help" id="shortcut-help-button" aria-controls="shortcuts-dialog" title="Keyboard shortcuts" hidden><span id="shortcut-summon-help"></span><span id="shortcut-unread-help"></span></button>
+      <button class="settings-button" id="notifications-button" aria-label="Desktop alerts" title="Desktop alerts" aria-expanded="false" aria-controls="notifications-dialog">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 17h14l-2-3V9a5 5 0 0 0-10 0v5l-2 3ZM10 20h4M12 2v2"/></svg>
+        <span>Desktop alerts</span><span class="settings-arrow" aria-hidden="true">↗</span>
+      </button>
+      <button class="settings-button" id="settings-button" aria-label="Account labels" title="Account labels" aria-expanded="false" aria-controls="settings-dialog">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"/><path d="m9.8 3-.5 2.2-2 .9-2-.7L3 9.2l1.6 1.5v2.6L3 14.8l2.3 3.8 2-.7 2 .9.5 2.2h4.4l.5-2.2 2-.9 2 .7 2.3-3.8-1.6-1.5v-2.6L21 9.2l-2.3-3.8-2 .7-2-.9-.5-2.2Z"/></svg>
+        <span>Account labels</span><span class="settings-arrow" aria-hidden="true">↗</span>
+      </button>
+      <div class="sidebar-footer"><span class="privacy-lock" aria-hidden="true">⌑</span><p>Separate sessions<br /><span>Stored on this PC</span></p></div>
+      <p class="tray-hint">Close keeps the app running.<br />To exit: tray icon → Quit.</p>
+
+      <section class="settings-dialog shortcuts-dialog" id="shortcuts-dialog" role="dialog" aria-modal="false" aria-labelledby="shortcuts-title" hidden>
+        <div class="settings-title-row"><h2 id="shortcuts-title">Keyboard shortcuts</h2><button id="shortcuts-close" class="icon-button small" aria-label="Close keyboard shortcuts">×</button></div>
+        <p class="settings-intro">Reach your chats from any app. Choose another key if Windows cannot register one.</p>
+        <form id="shortcuts-form">
+          <label for="summon-shortcut">Show or hide Switchboard</label>
+          <select id="summon-shortcut" name="summon"><option value="Ctrl+Alt+W">Ctrl + Alt + W</option><option value="Ctrl+Alt+Space">Ctrl + Alt + Space</option><option value="">Disabled</option></select>
+          <p class="shortcut-status" id="summon-shortcut-status" role="status">Checking availability…</p>
+          <label for="unread-shortcut">Next account with unread chats</label>
+          <select id="unread-shortcut" name="nextUnread"><option value="Ctrl+Alt+U">Ctrl + Alt + U</option><option value="Ctrl+Alt+N">Ctrl + Alt + N</option><option value="">Disabled</option></select>
+          <p class="shortcut-status" id="unread-shortcut-status" role="status">Checking availability…</p>
+          <button class="save-button" id="shortcuts-save" type="submit" disabled>Save shortcuts <span aria-hidden="true">✓</span></button>
+        </form>
+        <p class="permission-note">Account switching inside Switchboard always uses Ctrl + 1 / 2. Ctrl + 3 shows both accounts.</p>
+      </section>
+
+      <section class="settings-dialog notifications-dialog" id="notifications-dialog" role="dialog" aria-modal="false" aria-labelledby="notifications-title" hidden>
+        <div class="settings-title-row"><h2 id="notifications-title">Desktop alerts</h2><button id="notifications-close" class="icon-button small" aria-label="Close desktop alerts">×</button></div>
+        <p class="settings-intro">Choose which accounts may show alerts on this PC.</p>
+        <div class="notification-account personal">
+          <h3><i aria-hidden="true"></i><span data-name="personal">Personal</span></h3>
+          <p data-notification-status="personal" role="status">Browser permission not checked</p>
+          <button id="allow-notifications-personal" class="permission-button" type="button">Allow notifications</button>
+        </div>
+        <div class="notification-account work">
+          <h3><i aria-hidden="true"></i><span data-name="work">Work</span></h3>
+          <p data-notification-status="work" role="status">Browser permission not checked</p>
+          <button id="allow-notifications-work" class="permission-button" type="button">Allow notifications</button>
+        </div>
+        <p class="permission-note">Allow WhatsApp Web to show desktop alerts for this account. WhatsApp will reload.</p>
+        <p class="permission-note">After allowing, click <strong>Turn on</strong> in WhatsApp if “Message notifications are off” appears.</p>
+      </section>
+
+      <section class="settings-dialog" id="settings-dialog" role="dialog" aria-modal="false" aria-labelledby="settings-title" hidden>
+        <div class="settings-title-row"><h2 id="settings-title">Make it yours</h2><button id="settings-close" class="icon-button small" aria-label="Close account labels">×</button></div>
+        <p class="settings-intro">Labels only change here.</p>
+        <form id="labels-form">
+          <fieldset class="personal"><legend><i aria-hidden="true"></i>First account</legend><label for="personal-name">Name</label><input id="personal-name" name="personalName" maxlength="28" autocomplete="off" placeholder="Personal" required /><label for="personal-label">Phone label <span>(optional)</span></label><input id="personal-label" name="personalLabel" maxlength="24" autocomplete="off" placeholder="e.g. primary line" /></fieldset>
+          <fieldset class="work"><legend><i aria-hidden="true"></i>Second account</legend><label for="work-name">Name</label><input id="work-name" name="workName" maxlength="28" autocomplete="off" placeholder="Work" required /><label for="work-label">Phone label <span>(optional)</span></label><input id="work-label" name="workLabel" maxlength="24" autocomplete="off" placeholder="e.g. office line" /></fieldset>
+          <button class="save-button" type="submit">Save labels <span aria-hidden="true">✓</span></button>
+        </form>
+      </section>
+    </aside>
+
+    <header class="topbar">
+      <div class="identity"><button class="icon-button" id="sidebar-toggle" aria-label="Collapse account sidebar" aria-expanded="true" aria-controls="account-sidebar" title="Collapse account sidebar"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="13" rx="2"/><path d="M7 4v12M12 8l-2 2 2 2"/></svg></button><span class="identity-marker" aria-hidden="true"></span><div><h1 id="active-name">Personal</h1><p id="active-description">Your personal session</p></div></div>
+      <div class="topbar-actions">
+        <button class="icon-button" id="shortcuts-button" aria-label="Keyboard shortcuts" aria-expanded="false" aria-controls="shortcuts-dialog" title="Keyboard shortcuts"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2" y="4.5" width="16" height="11" rx="2"/><path d="M5 8h.1M8 8h.1M11 8h.1M14 8h.1M5 11h.1M8 11h.1M11 11h.1M14 11h.1M7 13h6"/></svg></button>
+        <button class="split-button" id="split-button" aria-pressed="false" title="Show both accounts side by side (Ctrl+3)"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="13" rx="2"/><path d="M10 4v12"/></svg><span>Split view</span></button>
+        <span class="action-divider" aria-hidden="true"></span>
+        <button class="icon-button" id="reload-button" aria-label="Reload Personal" title="Reload active account"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16.5 8A6.5 6.5 0 1 0 17 12M16.5 3.5V8H12"/></svg></button>
+      </div>
+      <div class="toast" id="toast" role="status" hidden></div>
+    </header>
+
+    <main class="workspace" aria-label="WhatsApp Web workspace">
+      <section class="loading-pane" data-pane="personal" aria-label="Personal session loading">
+        <div class="loading-illustration personal" aria-hidden="true"><span class="bubble big">···</span><span class="bubble little"></span></div>
+        <span class="eyebrow">A SPACE FOR EVERY SIDE OF YOU</span><h2>Opening <span data-name="personal">Personal</span></h2><p>WhatsApp Web is loading in its own session.<br />Link your phone when the QR code appears.</p><span class="loading-line" aria-hidden="true"></span>
+      </section>
+      <section class="loading-pane" data-pane="work" aria-label="Work session loading" hidden>
+        <div class="loading-illustration work" aria-hidden="true"><span class="bubble big">···</span><span class="bubble little"></span></div>
+        <span class="eyebrow">A SPACE FOR EVERY SIDE OF YOU</span><h2>Opening <span data-name="work">Work</span></h2><p>WhatsApp Web is loading in its own session.<br />Link your phone when the QR code appears.</p><span class="loading-line" aria-hidden="true"></span>
+      </section>
+    </main>
+    <div id="announcer" class="sr-only" aria-live="polite"></div>
+  </body>
+</html>

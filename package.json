@@ -1,0 +1,16 @@
+{
+  "name": "switchboard",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Two clearly labelled WhatsApp Web accounts in one Windows app",
+  "scripts": {
+    "dev": "node scripts/run.cjs tauri dev",
+    "build": "node scripts/run.cjs tauri build",
+    "check": "node scripts/run.cjs cargo check --manifest-path src-tauri/Cargo.toml",
+    "test": "node scripts/run.cjs cargo test --manifest-path src-tauri/Cargo.toml",
+    "test:ui": "node --test tests/ui.test.cjs",
+    "test:demo": "node --test tests/demo-preview.test.cjs",
+    "demo": "node tests/demo-preview.cjs"
+  },
+  "devDependencies": { "@tauri-apps/cli": "2.12.3" }
+}

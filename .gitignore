@@ -1,0 +1,32 @@
+node_modules/
+src-tauri/target/
+src-tauri/gen/
+.tools/
+dist/
+*.log
+test-results/
+
+# Local configuration, credentials, and browser sessions
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*.p12
+profiles/
+WebView2/
+EBWebView/
+workspace.json
+diagnostics.json
+*.dmp
+
+# Local captures and generated packages
+screenshots/
+*.exe
+*.msi
+*.zip
+*.7z
+*.bak
+.DS_Store
+Thumbs.db
